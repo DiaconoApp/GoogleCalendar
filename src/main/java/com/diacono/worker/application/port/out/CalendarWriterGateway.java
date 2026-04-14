@@ -1,4 +1,4 @@
 package com.diacono.worker.application.port.out;
 
-public interface SearchAllUsersPortOut {
+public interface CalendarWriterGateway {
 }
