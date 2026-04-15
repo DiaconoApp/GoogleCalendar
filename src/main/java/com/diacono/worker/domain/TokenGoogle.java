@@ -21,6 +21,10 @@ public class TokenGoogle {
         this.updatedAt = updatedAt;
     }
 
+    public String getTokenRefresh() {
+        return tokenRefresh;
+    }
+
     public boolean temTokenRefresh(){
         return this.tokenRefresh != null && !this.tokenRefresh.isBlank();
     }

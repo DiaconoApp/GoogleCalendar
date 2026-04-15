@@ -4,13 +4,14 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+//Informações provenientes da fila
 public record EventInformationCommand(
         UUID idEvento,
         UUID idIgreja,
         String name,
         String targetPublic,
-        LocalDateTime startDateTime,
-        LocalDateTime endDateTime,
+        StartEventComand startEvent,
+        EndEventCommand endEventCommand,
         String description,
         BigDecimal coast,
         String location
