@@ -9,9 +9,7 @@ import com.diacono.worker.domain.TokenGoogle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+
 
 //responsável por buscar token e distribuir pro use case correto.
 public class TokenOrchestratorImpl implements TokenOrchestratorUseCase {

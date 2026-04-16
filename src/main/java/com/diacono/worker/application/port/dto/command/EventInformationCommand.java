@@ -1,5 +1,7 @@
 package com.diacono.worker.application.port.dto.command;
 
+import org.springframework.cglib.core.Local;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -10,8 +12,8 @@ public record EventInformationCommand(
         UUID idIgreja,
         String name,
         String targetPublic,
-        StartEventComand startEvent,
-        EndEventCommand endEventCommand,
+        LocalDateTime startEvent,
+        LocalDateTime endEventCommand,
         String description,
         BigDecimal coast,
         String location
