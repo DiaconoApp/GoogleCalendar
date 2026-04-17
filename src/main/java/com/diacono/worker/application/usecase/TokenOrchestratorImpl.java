@@ -1,16 +1,19 @@
 package com.diacono.worker.application.usecase;
 
+import com.diacono.worker.application.exceptions.NoTaskException;
+import com.diacono.worker.application.exceptions.NoTokenFoundException;
 import com.diacono.worker.application.port.dto.command.EventInformationCommand;
 import com.diacono.worker.application.port.in.CreateSingleEventCalendarUseCase;
 import com.diacono.worker.application.port.in.TokenOrchestratorUseCase;
 import com.diacono.worker.application.port.out.AsyncManager;
 import com.diacono.worker.application.port.out.TokenGoogleRepository;
 import com.diacono.worker.domain.TokenGoogle;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Slf4j
 //responsável por buscar token e distribuir pro use case correto.
 public class TokenOrchestratorImpl implements TokenOrchestratorUseCase {
 
@@ -30,7 +33,8 @@ public class TokenOrchestratorImpl implements TokenOrchestratorUseCase {
         List<TokenGoogle> tokenGoogleList = tokenGoogleRepository.findTokensRefreshByIdIgreja(eventInformationCommand.idIgreja());
 
         if(tokenGoogleList == null || tokenGoogleList.isEmpty()){
-            //lançar erro
+            log.info("Nenhum usuário com token cadastrado");
+            return;
         }
 
         List<Runnable> tarefas = new ArrayList<>();
@@ -39,6 +43,11 @@ public class TokenOrchestratorImpl implements TokenOrchestratorUseCase {
             if(token.temTokenRefresh()){
                 tarefas.add(() -> createSingleEventCalendar.execute(token, eventInformationCommand));
             }
+        }
+
+        if(tarefas.isEmpty()){
+            log.info("Nenhuma token válido para execução");
+            return;
         }
 
         asyncManager.executeInParallel(tarefas);
