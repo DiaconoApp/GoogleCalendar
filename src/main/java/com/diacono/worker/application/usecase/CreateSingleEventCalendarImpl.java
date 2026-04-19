@@ -7,11 +7,13 @@ import com.diacono.worker.application.port.in.CreateSingleEventCalendarUseCase;
 import com.diacono.worker.application.port.out.CalendarWriterGateway;
 import com.diacono.worker.application.port.out.GoogleAuthGateway;
 import com.diacono.worker.domain.TokenGoogle;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
-@Slf4j
 public class CreateSingleEventCalendarImpl implements CreateSingleEventCalendarUseCase {
+
+    private static final Logger log = LoggerFactory.getLogger(CreateSingleEventCalendarImpl.class);
 
     private final GoogleAuthGateway googleAuthGateway;
     private final CalendarWriterGateway calendarWriterGateway;

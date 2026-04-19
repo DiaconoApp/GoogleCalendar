@@ -6,14 +6,22 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleRefreshTokenRequest;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 
-@Slf4j
+@Component
 public class AuthTokenGoogleAdapter implements GoogleAuthGateway {
 
-    private static final String CLIENT_ID = "client_id_diacono";
-    private static final String CLIENT_SECRET = "client_secret_diacono";
+    private static final Logger log = LoggerFactory.getLogger(AuthTokenGoogleAdapter.class);
+
+    @Value("${client.id.google}")
+    private String CLIENT_ID;
+    @Value("${client.secret.google}")
+    private String CLIENT_SECRET;
 
     @Override
     public String getAccessToken(String refreshToken) {

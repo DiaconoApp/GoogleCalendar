@@ -8,14 +8,16 @@ import com.diacono.worker.application.port.in.TokenOrchestratorUseCase;
 import com.diacono.worker.application.port.out.AsyncManager;
 import com.diacono.worker.application.port.out.TokenGoogleRepository;
 import com.diacono.worker.domain.TokenGoogle;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
 //responsável por buscar token e distribuir pro use case correto.
 public class TokenOrchestratorImpl implements TokenOrchestratorUseCase {
+
+    private static final Logger log = LoggerFactory.getLogger(TokenOrchestratorImpl.class);
 
     private final TokenGoogleRepository tokenGoogleRepository;
     private final CreateSingleEventCalendarUseCase createSingleEventCalendar;

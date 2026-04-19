@@ -13,7 +13,8 @@ import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.EventReminder;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
 import java.time.ZoneId;
@@ -22,8 +23,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Locale;
 
-@Slf4j
 public class GoogleCalendarAdapter implements CalendarWriterGateway{
+
+        private static final Logger log = LoggerFactory.getLogger(GoogleCalendarAdapter.class);
 
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
