@@ -18,21 +18,21 @@ public record EventDTO(
         @NotNull
         UUID idIgreja,
         @NotBlank
-        String name,
+        String nome,
         @NotBlank
-        String targetPublic,
+        String publicoAlvo,
         @NotNull
         @FutureOrPresent
-        LocalDateTime startEvent,
+        LocalDateTime dataHoraInicio,
         @NotNull
         @FutureOrPresent
-        LocalDateTime endEventCommand,
+        LocalDateTime dataHoraFim,
         @NotBlank
-        String description,
+        String descricao,
         @NotNull
         @DecimalMin(value="0.0", inclusive = true)
-        BigDecimal coast,
+        BigDecimal custo,
         @NotBlank
-        String location
+        String localizacao
 ) {
 }

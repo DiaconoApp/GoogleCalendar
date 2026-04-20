@@ -6,6 +6,9 @@ import com.diacono.worker.application.port.in.TokenOrchestratorUseCase;
 import com.diacono.worker.infrastructure.messaging.dto.EventDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Component;
+
 
 public class RabbitMQConsumer {
 
@@ -17,18 +20,19 @@ public class RabbitMQConsumer {
         this.useCase = useCase;
     }
 
+    @RabbitListener(queues = "${mq.queue.evento}")
     public void processMessage(EventDTO data){
 
         EventInformationCommand dataForUseCase = new EventInformationCommand(
                 data.idEvento(),
                 data.idIgreja(),
-                data.name(),
-                data.targetPublic(),
-                data.startEvent(),
-                data.endEventCommand(),
-                data.description(),
-                data.coast(),
-                data.location()
+                data.nome(),
+                data.publicoAlvo(),
+                data.dataHoraInicio(),
+                data.dataHoraFim(),
+                data.descricao(),
+                data.custo(),
+                data.localizacao()
         );
 
         try{

@@ -1,3 +1,5 @@
+
+
 INSERT INTO token_google (
     id_igreja,
     id_usuario,
@@ -5,8 +7,9 @@ INSERT INTO token_google (
     created_at,
     updated_at
 ) VALUES (
-    '2a6f6f14-c429-46e5-b9c9-9ac38f5ecb3f',
-    '7d61f4f0-4f37-4f4e-9f26-6beeb5d2f8a9',
+    '550e8400-e29b-41d4-a716-446655440000',
+    'f47ac10b-58cc-4372-a567-0e02b2c3d479', -- UUID Válido (sem letras após o F)
+
     CURRENT_TIMESTAMP,
     CURRENT_TIMESTAMP
 );

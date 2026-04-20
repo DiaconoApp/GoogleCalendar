@@ -16,30 +16,7 @@ import org.springframework.boot.CommandLineRunner;
 @SpringBootApplication
 public class WorkerApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(WorkerApplication.class);
-
 	public static void main(String[] args) {
 		SpringApplication.run(WorkerApplication.class, args);
 	}
-
-	@Bean
-	CommandLineRunner bootstrapTest(RabbitMQConsumer rabbitMQConsumer) {
-		return args -> {
-			EventDTO fakeEvent = new EventDTO(
-					UUID.randomUUID(),
-					UUID.fromString("2a6f6f14-c429-46e5-b9c9-9ac38f5ecb3f"),
-					"Culto de Jovens",
-					"Jovens",
-					LocalDateTime.now().plusMinutes(10),
-					LocalDateTime.now().plusHours(2),
-					"Evento de teste disparado no bootstrap da aplicacao",
-					new BigDecimal("0.00"),
-					"Auditorio Sede"
-			);
-
-			log.info("Executando teste de bootstrap: simulando mensagem recebida.");
-			rabbitMQConsumer.processMessage(fakeEvent);
-		};
-	}
-
 }
