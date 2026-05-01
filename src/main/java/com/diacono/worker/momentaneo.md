@@ -1,0 +1,3 @@
+Corrigir encoding de application.properties, pois o build falhou com MalformedInputException ao filtrar recursos (há caracteres com encoding inválido no arquivo).
+Revisar AuthTokenGoogleAdapter.java, que hoje tem CLIENT_ID e CLIENT_SECRET hardcoded (ideal mover para properties/env vars).
+Revisar RabbitMQConsumer.java: método consumidor está private e sem anotação de listener, então o consumo real de fila ainda não está conectado ao Spring/RabbitMQ.
