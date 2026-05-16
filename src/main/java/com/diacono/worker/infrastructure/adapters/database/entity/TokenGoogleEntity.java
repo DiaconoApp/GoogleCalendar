@@ -11,17 +11,28 @@ public class TokenGoogleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_token")
     private Long idToken;
-    private UUID idIgreja;
-    private UUID idUsuario;
+
+    @Column(name = "membro_id", nullable = false)
+    private UUID membroId;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(name = "token_Refresh", nullable = false)
     private String tokenRefresh;
+
+    @Column(nullable = false)
     private LocalDateTime createdAt;
+
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    public TokenGoogleEntity(Long idToken, UUID idIgreja, UUID idUsuario, String tokenRefresh, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public TokenGoogleEntity(Long idToken, UUID membroId, String email, String tokenRefresh, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.idToken = idToken;
-        this.idIgreja = idIgreja;
-        this.idUsuario = idUsuario;
+        this.membroId = membroId;
+        this.email = email;
         this.tokenRefresh = tokenRefresh;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -38,20 +49,20 @@ public class TokenGoogleEntity {
         this.idToken = idToken;
     }
 
-    public UUID getIdIgreja() {
-        return idIgreja;
+    public UUID getMembroId() {
+        return membroId;
     }
 
-    public void setIdIgreja(UUID idIgreja) {
-        this.idIgreja = idIgreja;
+    public void setMembroId(UUID membroId) {
+        this.membroId = membroId;
     }
 
-    public UUID getIdUsuario() {
-        return idUsuario;
+    public String getEmail() {
+        return email;
     }
 
-    public void setIdUsuario(UUID idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getTokenRefresh() {
