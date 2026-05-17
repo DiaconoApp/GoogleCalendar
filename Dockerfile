@@ -4,6 +4,7 @@ WORKDIR /app
 # Copia apenas os arquivos de dependências primeiro (otimiza o cache do Docker)
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
+RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline
 # Copia o código fonte e gera o pacote
 COPY src ./src
