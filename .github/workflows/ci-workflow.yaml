@@ -12,6 +12,7 @@ jobs:
     # Definimos outputs para o próximo job conseguir ler a tag gerada
     outputs:
       image_tag: ${{ steps.vars.outputs.sha_short }}
+      image_repo: ${{ steps.image.outputs.image_repo }}
 
     steps:
       - name: Checkout código
@@ -74,6 +75,6 @@ jobs:
           # Aqui passamos a tag dinâmica capturada no job anterior
           client-payload: >
             {
-              "image": "${{ steps.image.outputs.image_repo }}",
+              "image": "${{ needs.test-and-build.outputs.image_repo }}",
               "tag": "${{ needs.test-and-build.outputs.image_tag }}"
             }
