@@ -16,7 +16,7 @@ WORKDIR /app
 # Porta configurada no seu application.properties
 EXPOSE 8080
 # Copia o JAR do estágio de build e renomeia para facilitar a execução
-COPY --from=builder /app/target/*.jar app.jar
+COPY --from=builder /app/target/*.jar app-worker.jar
 # Usa variáveis de ambiente para o Java, permitindo ajustes de memória se necessário
 ENV JAVA_OPTS=""
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app-worker.jar"]
