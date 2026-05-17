@@ -15,9 +15,9 @@ public class Mapper {
 
     public TokenGoogle toTokenGoogle(TokenGoogleEntity entity) {
         return new TokenGoogle(
-                entity.getIdIgreja(),
-                entity.getIdUsuario(),
                 entity.getIdToken(),
+                entity.getMembroId(),
+                entity.getEmail(),
                 entity.getTokenRefresh(),
                 entity.getCreatedAt(),
                 entity.getUpdatedAt()

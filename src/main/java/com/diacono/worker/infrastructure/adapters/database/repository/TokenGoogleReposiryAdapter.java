@@ -6,7 +6,6 @@ import com.diacono.worker.infrastructure.adapters.database.entity.TokenGoogleEnt
 import com.diacono.worker.infrastructure.mapper.Mapper;
 
 import java.util.List;
-import java.util.UUID;
 
 public class TokenGoogleReposiryAdapter implements TokenGoogleRepository {
 
@@ -19,11 +18,8 @@ public class TokenGoogleReposiryAdapter implements TokenGoogleRepository {
     }
 
     @Override
-    public List<TokenGoogle> findTokensRefreshByIdIgreja(UUID idIgreja) {
-
-        List<TokenGoogleEntity> tokenGoogleEntities = jpaTokenGoogleRepository.findByIdIgreja(idIgreja);
-        List<TokenGoogle> tokenGoogleList = mapper.toListTokenGoogle(tokenGoogleEntities);
-
-        return tokenGoogleList;
+    public List<TokenGoogle> findAllTokensRefresh() {
+        List<TokenGoogleEntity> tokenGoogleEntities = jpaTokenGoogleRepository.findAll();
+        return mapper.toListTokenGoogle(tokenGoogleEntities);
     }
 }

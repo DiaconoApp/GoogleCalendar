@@ -4,6 +4,7 @@ WORKDIR /app
 # Copia apenas os arquivos de dependências primeiro (otimiza o cache do Docker)
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
+RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline
 # Copia o código fonte e gera o pacote
 COPY src ./src
@@ -16,7 +17,7 @@ WORKDIR /app
 # Porta configurada no seu application.properties
 EXPOSE 8080
 # Copia o JAR do estágio de build e renomeia para facilitar a execução
-COPY --from=builder /app/target/*.jar app.jar
+COPY --from=builder /app/target/*.jar app-worker.jar
 # Usa variáveis de ambiente para o Java, permitindo ajustes de memória se necessário
 ENV JAVA_OPTS=""
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app-worker.jar"]

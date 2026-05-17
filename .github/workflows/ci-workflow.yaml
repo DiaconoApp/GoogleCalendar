@@ -40,6 +40,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Set Docker image repo
+        id: image
+        shell: bash
+        env:
+          DOCKERHUB_REPOSITORY: ${{ vars.DOCKERHUB_REPOSITORY }}
+        run: |
+          repo="${DOCKERHUB_REPOSITORY:-${GITHUB_REPOSITORY##*/}}"
+          repo_lower=$(echo "$repo" | tr '[:upper:]' '[:lower:]')
+          echo "image_repo=$repo_lower" >> "$GITHUB_OUTPUT"
+
       - name: Build and Push Docker Image
         if: success()
         uses: docker/build-push-action@v5
@@ -48,8 +58,8 @@ jobs:
           push: true
           # Publicamos com 'latest' e com o 'Short SHA' para histórico
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:${{ steps.vars.outputs.sha_short }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.image.outputs.image_repo }}:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.image.outputs.image_repo }}:${{ steps.vars.outputs.sha_short }}
 
   notify-dispatch:
     needs: test-and-build
@@ -59,11 +69,11 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.PAT_TOKEN }}
-          repository: ${{ secrets.GITHUB_USERNAME_REPONAME }}
+          repository: ${{ vars.USERNAME_REPONAME_GITHUB }}
           event-type: worker-image-updated
           # Aqui passamos a tag dinâmica capturada no job anterior
           client-payload: >
             {
-              "image": "${{ secrets.DOCKERHUB_REPOSITORY }}",
+              "image": "${{ steps.image.outputs.image_repo }}",
               "tag": "${{ needs.test-and-build.outputs.image_tag }}"
             }

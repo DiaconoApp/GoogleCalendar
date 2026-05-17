@@ -18,9 +18,9 @@ public class AuthTokenGoogleAdapter implements GoogleAuthGateway {
 
     private static final Logger log = LoggerFactory.getLogger(AuthTokenGoogleAdapter.class);
 
-    @Value("${client.id.google}")
+    @Value("${google.oauth.client-id}")
     private String CLIENT_ID;
-    @Value("${client.secret.google}")
+    @Value("${google.oauth.client-secret}")
     private String CLIENT_SECRET;
 
     @Override
