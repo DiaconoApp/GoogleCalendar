@@ -32,23 +32,23 @@ public class TokenOrchestratorImpl implements TokenOrchestratorUseCase {
     @Override
     public void execute(EventInformationCommand eventInformationCommand) {
 
-        List<TokenGoogle> tokenGoogleList = tokenGoogleRepository.findTokensRefreshByIdIgreja(eventInformationCommand.idIgreja());
+        List<TokenGoogle> tokenGoogleList = tokenGoogleRepository.findAllTokensRefresh();
 
-        if(tokenGoogleList == null || tokenGoogleList.isEmpty()){
-            log.info("Nenhum usuário com token cadastrado");
+        if (tokenGoogleList == null || tokenGoogleList.isEmpty()) {
+            log.info("Nenhum usuario com token Google cadastrado.");
             return;
         }
 
         List<Runnable> tarefas = new ArrayList<>();
 
-        for(TokenGoogle token : tokenGoogleList){
-            if(token.temTokenRefresh()){
+        for (TokenGoogle token : tokenGoogleList) {
+            if (token.temTokenRefresh()) {
                 tarefas.add(() -> createSingleEventCalendar.execute(token, eventInformationCommand));
             }
         }
 
-        if(tarefas.isEmpty()){
-            log.info("Nenhuma token válido para execução");
+        if (tarefas.isEmpty()) {
+            log.info("Nenhum token refresh valido disponivel para execucao.");
             return;
         }
 

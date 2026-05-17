@@ -5,20 +5,32 @@ import java.util.UUID;
 
 public class TokenGoogle {
 
-    private final UUID idGreja;
-    private final UUID idUsuario;
     private final Long idToken;
+    private final UUID membroId;
+    private final String email;
     private final String tokenRefresh;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
 
-    public TokenGoogle(UUID idGreja, UUID idUsuario, Long idToken, String tokenRefresh, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.idGreja = idGreja;
-        this.idUsuario = idUsuario;
+    public TokenGoogle(Long idToken, UUID membroId, String email, String tokenRefresh, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.idToken = idToken;
+        this.membroId = membroId;
+        this.email = email;
         this.tokenRefresh = tokenRefresh;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public Long getIdToken() {
+        return idToken;
+    }
+
+    public UUID getMembroId() {
+        return membroId;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getTokenRefresh() {
