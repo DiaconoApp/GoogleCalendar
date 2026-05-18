@@ -20,7 +20,7 @@ public class TokenGoogleEntity {
     @Column(nullable = false)
     private String email;
 
-    @Column(name = "token_Refresh", nullable = false)
+    @Column(name = "refresh_token", nullable = false)
     private String tokenRefresh;
 
     @Column(nullable = false)
