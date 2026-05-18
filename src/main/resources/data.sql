@@ -1,7 +1,7 @@
 INSERT INTO token_google (
     membro_id,
     email,
-    token_refresh,
+    refresh_token,
     created_at,
     updated_at
 ) VALUES (

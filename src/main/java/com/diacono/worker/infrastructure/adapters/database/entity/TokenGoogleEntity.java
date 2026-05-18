@@ -11,7 +11,7 @@ public class TokenGoogleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_token")
+    @Column(name = "id_interno")
     private Long idToken;
 
     @Column(name = "membro_id", nullable = false)
@@ -20,7 +20,7 @@ public class TokenGoogleEntity {
     @Column(nullable = false)
     private String email;
 
-    @Column(name = "token_Refresh", nullable = false)
+    @Column(name = "refresh_token", nullable = false)
     private String tokenRefresh;
 
     @Column(nullable = false)
